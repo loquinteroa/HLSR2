@@ -1,0 +1,22 @@
+{
+    "name": "hlsr-shift-manager",
+    "version": "2026.1.29-223505",
+    "description": "React app with Express API and Firebase",
+    "scripts": {
+        "analyze": "source-map-explorer 'build/static/js/*.js'",
+        "start": "npm run updateversion ; exit 0 && env-cmd -f ./environments/.env.local react-scripts start",
+        "build:dev": "env-cmd -f ./environments/.env.dev react-scripts build && npm run compress",
+        "build": "npm run updateversion ; exit 0 && react-scripts build && npm run compress",
+        "compress": "gzipper compress ./build ./gzip_build --output-file-format [filename].[ext] --verbose",
+        "postbuild": "purgecss --css build/static/css/*.css --content build/static/index.html build/static/js/*.js --output build/static/css",
+        "test": "env-cmd -f ./environments/.env.test.local react-scripts test",
+        "eject": "react-scripts eject",
+        "codegen": "graphql-codegen --config codegen.ts",
+        "updateversion": "powershell -Command \"& {npm version (Get-Date -Format 'yyyy.MM.dd-HHmmss') -noExit }\""
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.8",
+        "firebase": "^12.8.0",
+        "react-bootstrap": "^2.10.10"
+    }
+}
