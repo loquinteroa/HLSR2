@@ -1,0 +1,448 @@
+.favIcon{
+    margin-top: 3px;
+    margin-left: 0;
+    height: 16px;
+}
+.hideUpcomingFeature {
+    display: none;
+}
+.cardMain{
+    padding: 6px;
+    margin-bottom: 5px;
+}
+.cardContent{
+    padding: 0;
+    margin: 0;
+}
+.gridContainer{
+    border-bottom: solid 1px #F9DFE3;
+}
+.gridHeader{
+    padding: 5px;
+    vertical-align: middle;
+}
+.gridContent {
+    padding: 5px 10px;
+}
+.k-table-td {
+    overflow: initial;
+    overflow-wrap: break-word;
+}
+.avatarSize{
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+.avatarSizeMyLinks{
+    width: 16px;
+    height: 16px;
+    margin-left: 3px;
+    margin-right: 6px;
+}
+.cardActions{
+    margin-left: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+.progress{
+    min-width: 24px;
+}
+.buttonSize{
+    width: 20px;
+    min-width: 40px;
+}
+.cardMainSearch{
+    margin-top: 8px;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+.cardContentSearch{
+    margin: 0 !important;
+    padding-bottom: 8px !important;
+}
+.gridContainerSearch{
+    margin: 0;
+}
+.gridContainerSearch div {
+    padding-right: 3px;
+}
+.gridButtonBar{
+    margin-bottom: 5px;
+}
+.boxMargin{
+    margin-top: 7px;
+}
+
+.gridContainerMyLinks{
+    margin-top: 5px;
+}
+
+.gridContainerMyLinksSort{
+    margin-bottom: 15px;
+}
+.searchIconFill{
+    fill: #2C414D;
+}
+.text{
+    width: 100%;
+}
+.fullUrl {
+    word-break: break-word;
+}
+.personalLinks {
+    margin-top: 10px;
+    margin-bottom: 6px;
+    padding-top: 5px;
+    font-size: 18px;
+}
+.formLabels {
+    padding-top: 16px;
+}
+.longLinkLabel {
+    margin: 0;
+}
+.myLinkLabel {
+    margin-bottom: 8px;
+}
+.shortLinkLabel {
+    margin: 0 !important;
+}
+.ownerLabel{
+    margin-left: 0px
+}
+.shortLinkPrefix {
+    margin: 10px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.longLinkTextField {
+    padding-right: 0px;
+}
+.shortLinkTextFieldGrid{
+    text-align: left;
+}
+.gridButtons {
+    padding: 16px 0 0 0;
+}
+.gridPeoplePicker {
+    width: 100%;
+}
+.formGridContainer {
+    padding: 6px 6px 0 6px;
+}
+
+.createButton {
+    width: 115px;
+    box-shadow: 2px 2px lightgray;
+}
+.formProgress{
+    width: 24px;
+}
+.clearButton{
+    width: 115px;
+    box-shadow: 2px 2px lightgray;
+}
+.gridButtonBarMyLinks {
+    margin-left: 3px;
+}
+.gridContainerSearchTextField {
+    margin-top: 15px;
+}
+.gridItemSearchTextField {
+    margin-bottom: 0 important;
+}
+.gridSortByLabel {
+    margin: 13px 3px 0 3px;
+}
+/* .gridSortByLabelMyLinks {
+    margin: 13px 3px 0 3px;
+} */
+.sortByLabel {
+    font-size: 14px;
+}
+.dropDownLabel {
+    margin-top: 10px;
+}
+.gridSearchLabel {
+    font-weight: 700;
+    color: #626364 !important;
+}
+.gridSearchColumn {
+    padding: 1px;   
+}
+.searchTextField{
+    width: 100%;
+}
+
+.gridAdminContainer .longLinkLabel {
+    margin: 10px 10px 0px 10px;
+}
+
+.gridAdminContainer .gridAdminFeatureButton {
+    margin: 13px 0;
+}
+
+.gridAdminContainer .gridBulkErrorMessage {
+    color: red;
+}
+
+.gridAdminContainer .favIcon {
+    margin-left: 0;
+}
+
+.gridAdminContainer .gridSortByLabel .sortByLabel {
+    text-align: left;
+}
+
+.gridAdminContainer .gridSortByLabel {
+    flex-basis: 9%;
+}
+
+.gridAdminContainer .gridSortDropdown {
+    flex-basis: 19%;
+    max-width: 19%;
+}
+
+.gridAdminForms {
+    margin-top: 100px;
+    padding-left: 20px;
+}
+
+.gridAdminForms .gridPeoplePicker {
+    margin: 5px 5px 10px 0;
+    width: 100%;
+}
+
+.gridBreak {
+    display: none;
+}
+
+.gridAdminContainer .gridBreak {
+    display: block;
+}
+.shortLinkHeader{
+    margin: 0 !important;
+    padding: 5px !important;
+    padding-bottom: 2px !important;
+    cursor: pointer;
+}
+.centerAligned{
+    text-align: center !important;
+}
+.progressBox{
+    border: 'solid 1px #E1E1E1';
+    padding: 2px;
+    border-radius: 3px;
+}
+.undoAlert{
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-weight: 500;
+    color: rgb(17, 16, 16);
+    min-width: 250px;
+}
+.undoAlertText{
+    color: #0B5345;
+    vertical-align: middle;
+    font-size: 14px;
+    padding: 2px;
+}
+.undoAlertButton{
+    text-align: center;
+    height: 22px;
+    vertical-align: middle;
+    color:#0B5345;
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration: underline;
+}
+.skeletonSquare{
+    margin: 4px;
+    margin-bottom: 0;
+    width: 40px;
+    height: 40px;
+}
+.skeletonGrid{
+    margin-top: 5px;
+}
+.skeletonRounded{
+    margin-top: 5px;
+    height: 20px;
+}
+.skeletonSearch{
+    height: 80px;
+    margin-bottom: 14px;
+    padding-bottom: 4px;
+    background-color: #f0f0f5;
+}
+.skeletonAdmin{
+    height: 26px;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    background-color: #f0f0f5;
+}
+.skeletonSearchStack{
+    width: 100%;
+    padding: 3px;
+    vertical-align: top;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+.popupHeader{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+.popupFooter{
+    font-size: 14px;
+}
+.globalSearchBtn{
+    width: 145px;
+    height: 35px;
+    margin-left: 3px;
+    box-shadow: 2px 2px lightgray;
+}
+.landingPageGrid{
+    vertical-align: middle;
+    padding: 2px;
+    padding-left: 10px;
+}
+.landingPage{
+    padding-left: 5px;
+    padding-top: 8px;
+    font-weight: 600;
+}
+.landignPageTitle{
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+.SearchText{
+  font-size: 16px !important;
+}
+
+.searchLandingTitle{
+    font-size: 19px;
+    font-weight: 400;
+    text-align: center;
+    margin-right: 50px;
+    margin-bottom: 8px;
+  }
+  .searchLandingDesc{
+    font-size: 14px;
+    text-align: center;
+    margin-right: 50px;
+    margin-top: 12px;
+  }
+  .searchLandingGrid{
+    text-align: center;
+  }
+  .searchLandingTextField{
+    font-size: 20px;
+  }
+  .searchBar{
+    text-align: center;
+    padding: 0;
+    margin-top: 5px;
+    padding-left: 80px;
+    font-size: 16px;
+  }
+  .searchIconFill{
+    text-align: left !important;
+    height: 32px !important;
+    width: 32px;
+  }
+  .SearchText{
+    font-size: 16px !important;
+  }
+  .searchbox{
+    padding: 3px;
+    line-height: 15px;
+    font-size: 14px;
+    padding-left: 5px;
+    min-width: 250px;
+    width: 80%;
+    border: solid 1px rgba(218, 41, 28, 0.5)
+  }
+  .selected{
+    color: rgba(218, 41, 28, 1);
+  }
+  .dialogTitle{
+    font-size: 16px;
+    font-weight: bold;
+    color:  rgba(218, 41, 28, 1);
+    padding: 0;
+  }
+  .popUpWindow{
+    border: solid 0.2px gray;
+    box-shadow: 5px 5px 5px gray;
+  }
+  .k-column-title{
+    font-weight: 600;
+    color: rgb(45, 45, 45);
+  }
+  .k-window-title{
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(36, 36, 36);
+  }
+  .css-8ugzje-MuiButtonBase-root-MuiButton-root.Mui-disabled {
+    color: darkgray;
+    border: solid 1px rgb(247, 217, 215);
+  }
+  .boldText{
+    font-weight: bold;
+  }
+  .searchCount {
+    margin-top: 16px;
+  }
+
+  .adminSearchTools {
+    padding: 10px;
+  }
+
+  .adminSearchTools .MuiGrid-item {
+    padding: 5px 5px 5px 0;
+  }
+
+  .adminSearchTools .linkStats {
+    padding-top: 13px;
+    margin-left: 5px;
+    font-weight: bold;
+  }
+
+  .adminSearchTools .linkStats .MuiTypography-subtitle1 {
+    font-weight: bold;
+  }  
+
+  .adminModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400;
+    background-color: white;
+    border: 2px solid #999;
+    box-shadow: 24;
+    padding: 30px;
+  }
+
+  .MuiTableCell-head {
+    text-transform: none;
+  }
+
+  .calendar{
+    font-size: 8px;
+    padding: 0;
+  }
+
+  @media only screen and (max-width: 960px) {
+    .gridContainerMyLinks {
+        margin-top: 30px;
+    }
+  }

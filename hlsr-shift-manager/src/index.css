@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.mainContent {
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+.pageMargin{
+  margin-top: 1rem;
+  background-color: '#f7f7f7'
+}
+.stickyForm {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1rem; 
+}
+.statusPagesAvatar{
+  padding: 0;
+  margin: 0; 
+}
+.maintenanceDivider{
+  margin-top: 15px;
+  margin-bottom: 40px;
+}
+.statusPagesDivider{
+  margin-top: 15px;
+  width: 100%;
+}
+.userAvatar{
+  margin-left: 10px;
+}
+.learn{
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: 5px;
+}
+.pageCard{
+  min-height: 500px;
+  margin-bottom: 30px
+}
+
+.errorCard{
+  min-height: 200px;
+  margin-top: 100px
+}
+.chatbot{
+  width: 450px; 
+  height: 400px;
+  background-color: white !important;
+  vertical-align: top;
+  border: solid 1px gray;
+}
+.botright{
+  vertical-align: top;
+  display: flex;
+  align-items: right;
+  justify-content: right;
+  height: 400px;
+  position: absolute;
+  top: 80px;
+  right: 10px;
+  margin-top: 20px;
+  z-index: 1000;
+}
+.bot{
+  margin-top: 30px;
+  margin-left: 20px;
+  align-items: right;
+  justify-content: right;
+  height: 500px !important;
+  width: 500px;
+  text-align: center;
+}
+.mainTitle{
+  padding-top: 3px;
+  color: #192F5B;
+}
