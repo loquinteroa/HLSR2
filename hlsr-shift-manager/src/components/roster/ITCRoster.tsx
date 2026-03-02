@@ -99,6 +99,7 @@ export const ITCRoster: React.FC = () => {
 
     const columns = [
         { name: 'Name', selector: (row: Account) => row.screenName, grow:3 },
+        { name: 'Phone', selector: (row: Account) => row.phone, grow: 2 },
         { name: 'E-mail Address', selector: (row: Account) => row.email, grow: 3 },
         { name: 'Title', selector: (row: Account) => row.title, grow: 3 },
     ]

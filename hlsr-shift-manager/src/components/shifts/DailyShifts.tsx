@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Grid, Typography, Box } from '@mui/material';
 import { Shift } from '../../types/shift'
+import { OnDuty } from '../../types/onDuty'
 import HLSRSBService from '../../api/HLSRSBService'
 import AppSettingsService from "../../api/AppSettingsService";
 import { Skeleton, Stack } from '@mui/material';
@@ -47,7 +48,8 @@ export const DailyShifts: React.FC = () => {
         setIsLoading(true)
         const strShifts: any = localStorage.getItem('shifts') === undefined ? "" : localStorage.getItem('shifts');
         try {
-            const whosOn: string[] = await hlsrSBService.getWhosOn(selectedCommittee.id)
+            const whosOn: OnDuty[] = await hlsrSBService.getWhosOn(selectedCommittee.id)
+
             let shifts = JSON.parse(strShifts?.toString() || '[]')
             
             if(!Array.isArray(shifts) || shifts.length === 0) {
@@ -55,10 +57,11 @@ export const DailyShifts: React.FC = () => {
                 return
             }
 
-            shifts.forEach(function (shift: Shift){
-                const memberIdStr = shift.memberId?.toString ? shift.memberId.toString() : String(shift.memberId || "")
-                shift.onDuty = Array.isArray(whosOn) && whosOn.includes(memberIdStr)
-            })
+           shifts.forEach(shift => {
+            shift.onDuty = whosOn.some(
+                folk => folk.memberId === shift.memberId && folk.shiftId === shift.id
+                );
+            });
             
             setShiftData(shifts)
             localStorage.setItem("shifts", JSON.stringify(shifts))
@@ -133,7 +136,7 @@ export const DailyShifts: React.FC = () => {
 
     const isOnDuty = (onDuty: boolean) => {
         if(onDuty){
-            return <center><img alt="On Duty" src={greenLight} style={{width: 20}} /></center>
+            return <center><img alt="On Duty" src={greenLight} style={{width: 36}} /></center>
         }
         else{
             return <span></span>

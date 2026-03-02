@@ -51,7 +51,7 @@ class HLSRSBService {
     public async getWhosOn(workgroupId: string) {
         const instance = axios.create()
         const url = this.appSettings.GetWebApiBaseUri() + "/volunteers/onduty/ids"
-        const data = {"workgroupId": workgroupId}
+        const data = {"workgroupid": workgroupId}
         try{
             const response = await instance.post(url, data)
             return response.data
