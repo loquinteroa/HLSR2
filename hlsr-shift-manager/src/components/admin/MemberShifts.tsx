@@ -141,7 +141,7 @@ export const MemberShifts: React.FC = () => {
         { name: 'Start Time', selector: (row:any)  => row.startTime},
         { name: 'End Date', selector: (row:any)  => row.endDate },
         { name: 'End Time', selector: (row:any)  => row.endTime },
-        { name: 'Shift Role', selector: (row:any)  => row.roleName }
+        { name: 'Shift Role', selector: (row:any)  => row.subject }
     ]
 
     const customStyles = {

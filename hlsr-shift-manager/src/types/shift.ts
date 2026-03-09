@@ -6,6 +6,7 @@ export interface Shift{
     onDuty: boolean;
     roleId: string;
     roleName: string;
+    subject: string;
     title: string;
     startDate: string;
     startTime: string;

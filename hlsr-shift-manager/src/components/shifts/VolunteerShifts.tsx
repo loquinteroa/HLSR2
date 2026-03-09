@@ -127,7 +127,7 @@ export const VolunteerShifts: React.FC = () => {
         { name: 'Start Time', selector: (row: Shift) => row.startTime, grow: 2 },
         { name: 'End Time', selector: (row: Shift) => row.endTime, grow: 2 },
         { name: 'Shift Hours', selector: (row: Shift) => formatHours(getShiftHours(row)), grow: 2 },
-        { name: 'Shift Role', selector: (row: Shift) => row.roleName, grow: 3, sortable: true },
+        { name: 'Subject', selector: (row: Shift) => row.subject, grow: 3, sortable: true },
     ];
 
     const customStyles = {

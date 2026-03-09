@@ -144,11 +144,13 @@ export const DailyShifts: React.FC = () => {
     }
 
     const columns = [
-        { name: 'Start Time', selector: (row:any) => row.startTime },
-        { name: 'End Time', selector: (row:any)  => row.endTime },
+        { name: 'Start Time', width: "100px", selector: (row:any) => row.startTime },
+        { name: 'End Time', width: "100px", selector: (row:any)  => row.endTime },
         { name: 'Committee Person', selector: (row:any) => row.memberName },
-        { name: 'Shift Role', selector: (row:any)  => row.roleName },
-        { name: 'Clocked-In', selector: (row:any) => isOnDuty(row.onDuty) }
+        { name: 'Phone', width: "100px", selector: (row:any) => row.memberPhone },
+        { name: 'E-mail', width: "230px", selector: (row:any) => row.memberEmail },
+        { name: 'Subject', width: "220px", selector: (row:any)  => row.subject },
+        { name: 'Clocked-In', width: "80px", selector: (row:any) => isOnDuty(row.onDuty) }
     ]
 
     const customStyles = {

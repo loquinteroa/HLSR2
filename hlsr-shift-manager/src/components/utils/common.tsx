@@ -122,6 +122,7 @@ export function convertToShiftsArray(
         startTime: formatTime(elem.start_date),
         endDate: formatDate(elem.end_date, false),
         endTime: formatTime(elem.end_date),
+        subject: elem.subject ? elem.subject : "",
         title: elem.title ? elem.title : ""
       });
     }
