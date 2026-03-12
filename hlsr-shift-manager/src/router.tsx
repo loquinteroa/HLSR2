@@ -13,6 +13,7 @@ const Roster = loadable(() => import("./pages/Roster"));
 const VolunteerShiftsPage = loadable(() => import("./pages/VolunteerShifts"));
 const Admin = loadable(() => import("./pages/Admin"));
 const RegisteredUsersPage = loadable(() => import("./pages/RegisteredUsers"));
+const ShiftsReportPage = loadable(() => import("./pages/ShiftsReport"));
 const Logout = loadable(() => import("./components/Logout"));
 
 // ─── Status pages (lazy-loaded) ──────────────────────────────────────────────
@@ -76,6 +77,10 @@ const routes: RouteObject[] = [
       {
         path: "registered-users",
         element: <RegisteredUsersPage />,
+      },
+      {
+        path: "shifts-report",
+        element: <ShiftsReportPage />,
       },
     ],
   },

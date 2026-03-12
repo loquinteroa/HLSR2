@@ -8,6 +8,7 @@ import AppSettingsService from '../../api/AppSettingsService';
 import { Account } from '../../types/account';
 import { Shift } from '../../types/shift';
 import { useAuth } from '../../contexts/AuthContext';
+import { ActivityLogger } from '../../api/ActivityLogger';
 import '../links/LinkItem.css';
 
 const getShiftHours = (shift: Shift) => {
@@ -99,9 +100,28 @@ export const VolunteerShifts: React.FC = () => {
         const endDate = `${year}-12-31`;
         hlsrSBService.getVolunteerShifts(workgroupId, member.id, startDate, endDate)
             .then((response: any) => {
-                const shifts: Shift[] = response?.shifts || response || [];
+                const shifts: Shift[] = (response?.Shifts || []).map((s: any) => ({
+                    id: s.Id,
+                    memberId: s.MemberId,
+                    memberName: s.MemberName,
+                    memberPhone: s.MemberPhone,
+                    memberEmail: s.MemberEmail,
+                    onDuty: s.OnDuty,
+                    roleId: s.RoleId,
+                    roleName: s.RoleName,
+                    subject: s.Subject,
+                    title: s.Title,
+                    startDate: s.StartDate,
+                    startTime: s.StartTime,
+                    startDateTime: s.StartDateTime,
+                    startDateSorting: s.StartDateTime,
+                    endDate: s.EndDate,
+                    endTime: s.EndTime,
+                    endDateTime: s.EndDateTime,
+                }));
                 setShiftData(shifts);
                 setReportTitle(`${member.screenName} — ${shifts.length} Shift${shifts.length !== 1 ? 's' : ''}` + " (" + formatHours(totalHours(shifts)) + " hrs.)");
+                ActivityLogger.logActivity("view_volunteer_shifts", currentUser?.email || "", { member: member.screenName, count: shifts.length });
             })
             .catch((err: any) => {
                 console.error('Error loading volunteer shifts:', err);

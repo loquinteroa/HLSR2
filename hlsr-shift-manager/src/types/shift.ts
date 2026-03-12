@@ -3,6 +3,7 @@ export interface Shift{
     memberId: string;
     memberName: string;
     memberPhone: string;
+    memberEmail: string;
     onDuty: boolean;
     roleId: string;
     roleName: string;

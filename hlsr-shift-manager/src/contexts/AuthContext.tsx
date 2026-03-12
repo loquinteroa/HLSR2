@@ -9,6 +9,7 @@ import {
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { auth } from "../firebase";
 import app from "../firebase";
+import { ActivityLogger, setCurrentRole } from "../api/ActivityLogger";
 
 const firebaseFunctions = getFunctions(app!);
 
@@ -40,10 +41,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState(true);
 
   async function login(email: string, password: string): Promise<void> {
-    await signInWithEmailAndPassword(auth!, email, password);
+    try {
+      await signInWithEmailAndPassword(auth!, email, password);
+    } catch (err: any) {
+      ActivityLogger.logLoginFailed(email, err.code || err.message);
+      throw err;
+    }
   }
 
   async function logout(): Promise<void> {
+    if (currentUser?.email) ActivityLogger.logLogout(currentUser.email);
     await signOut(auth!);
   }
 
@@ -55,7 +62,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const callGrantRole = httpsCallable(firebaseFunctions, 'grantUserRole');
     await callGrantRole({ email, roleName });
     const token = await currentUser?.getIdTokenResult(true);
-    setUserRole((token?.claims.role as string) || "");
+    const newRole = (token?.claims.role as string) || "";
+    setUserRole(newRole);
+    setCurrentRole(newRole);
   }
 
   useEffect(() => {
@@ -74,7 +83,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
           setCurrentUser(user);
           if (user) {
             const token = await user.getIdTokenResult();
-            setUserRole((token.claims.role as string) || "");
+            const role = (token.claims.role as string) || "";
+            setUserRole(role);
+            setCurrentRole(role);
+            // Log only fresh logins (not session restores on page reload)
+            const lastSignIn = new Date(user.metadata.lastSignInTime!).getTime();
+            if (Date.now() - lastSignIn < 10000) {
+              ActivityLogger.logLogin(user.email!, role);
+            }
           } else {
             setUserRole("");
           }

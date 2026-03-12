@@ -1,4 +1,5 @@
-import { useRoutes } from "react-router-dom";
+import { useRoutes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import router from "./router";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -8,6 +9,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { SnackbarProvider } from "notistack";
 import NavigationLayout from "./layouts/NavigationLayout";
 import { useAuth } from "./contexts/AuthContext";
+import { ActivityLogger } from "./api/ActivityLogger";
 
 /**
  * Wrapper that conditionally renders either:
@@ -20,6 +22,13 @@ import { useAuth } from "./contexts/AuthContext";
 function AppShell() {
   const { currentUser } = useAuth();
   const content = useRoutes(router);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (currentUser?.email) {
+      ActivityLogger.logPageView(location.pathname, currentUser.email);
+    }
+  }, [location.pathname, currentUser]);
 
   if (currentUser) {
     // Authenticated – wrap in the full navigation layout

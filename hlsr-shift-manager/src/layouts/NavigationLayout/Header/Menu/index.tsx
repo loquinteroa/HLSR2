@@ -179,6 +179,19 @@ const HeaderMenu: FC<HeaderMenuProps> = ({
                   classes={{ root: 'MuiListItem-indicators' }}
                   button
                   component={NavLink}
+                  to="/shifts-report"
+                >
+                  <ListItemText
+                    primaryTypographyProps={{ noWrap: true, fontSize: 14 }}
+                    primary="SHIFTS REPORT"
+                  />
+                </ListItem>
+              )}
+              {userRole === "Admin" && (
+                <ListItem
+                  classes={{ root: 'MuiListItem-indicators' }}
+                  button
+                  component={NavLink}
                   to="/registered-users"
                 >
                   <ListItemText

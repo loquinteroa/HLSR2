@@ -87,6 +87,19 @@ class HLSRSBService {
         }
     }
 
+    public async getShiftsReport() {
+        const instance = axios.create()
+        const url = this.appSettings.GetWebApiBaseUri() + "/shifts/report"
+        const data = {}
+        try{
+            const response = await instance.post(url, data)
+            return response.data
+        } catch (e) {
+            console.error(e);
+            throw e;
+        }
+    }
+
     //Gets shift data
     public async getShiftList(workgroupId: string, startDate: string, endDate: string) {
         const instance = axios.create()

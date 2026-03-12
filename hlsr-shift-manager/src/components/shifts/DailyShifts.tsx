@@ -1,9 +1,11 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Grid, Typography, Box } from '@mui/material';
+import { Grid, Typography, Box, CircularProgress } from '@mui/material';
 import { Shift } from '../../types/shift'
 import { OnDuty } from '../../types/onDuty'
 import HLSRSBService from '../../api/HLSRSBService'
 import AppSettingsService from "../../api/AppSettingsService";
+import { ActivityLogger } from '../../api/ActivityLogger';
+import { auth } from '../../firebase';
 import { Skeleton, Stack } from '@mui/material';
 import '../links/LinkItem.css';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -91,10 +93,30 @@ export const DailyShifts: React.FC = () => {
         const shiftListResp = hlsrSBService.getShiftList(committee, startDate, startDate)
         shiftListResp.then((response: any) => {
             if (response) {
-                setShiftTitle(response.shiftTitle || "")
-                setSelectedCommittee({id: response.workgroupId || committee, name: response.workgroupName || ""})
-                setShiftData(response.shifts || [])
-                localStorage.setItem("shifts", JSON.stringify(response.shifts || []))
+                setShiftTitle(response.ShiftTitle || "")
+                setSelectedCommittee({id: response.WorkgroupId || committee, name: response.WorkgroupName || ""})
+                const shifts: Shift[] = (response.Shifts || []).map((s: any) => ({
+                    id: s.Id,
+                    memberId: s.MemberId,
+                    memberName: s.MemberName,
+                    memberPhone: s.MemberPhone,
+                    memberEmail: s.MemberEmail,
+                    onDuty: s.OnDuty,
+                    roleId: s.RoleId,
+                    roleName: s.RoleName,
+                    subject: s.Subject,
+                    title: s.Title,
+                    startDate: s.StartDate,
+                    startTime: s.StartTime,
+                    startDateTime: s.StartDateTime,
+                    startDateSorting: s.StartDateTime,
+                    endDate: s.EndDate,
+                    endTime: s.EndTime,
+                    endDateTime: s.EndDateTime,
+                }))
+                setShiftData(shifts)
+                localStorage.setItem("shifts", JSON.stringify(shifts))
+                ActivityLogger.logActivity("load_shifts", auth?.currentUser?.email || "", { date: startDate, committee, count: shifts.length })
             }
             setIsLoading(false)
         })
@@ -153,6 +175,13 @@ export const DailyShifts: React.FC = () => {
         { name: 'Clocked-In', width: "80px", selector: (row:any) => isOnDuty(row.onDuty) }
     ]
 
+    const conditionalRowStyles = [
+        {
+            when: (row: Shift) => row.onDuty === true,
+            style: { backgroundColor: '#d4edda' },
+        },
+    ]
+
     const customStyles = {
         rows: {
             style: {
@@ -184,7 +213,7 @@ export const DailyShifts: React.FC = () => {
         if(!isLoading){
             const captains = data.filter((item:Shift) => item.title.toLowerCase().includes('captain'))
             if(captains.length > 0)
-                return (<DataTable responsive={true} columns={columns} data={captains} striped dense customStyles={customStyles} />)
+                return (<DataTable responsive={true} columns={columns} data={captains} striped dense customStyles={customStyles} conditionalRowStyles={conditionalRowStyles} />)
             else
                 return(<span>No volunteers</span>)
         }
@@ -195,7 +224,7 @@ export const DailyShifts: React.FC = () => {
         if(!isLoading){
             const showtime = data.filter((item:Shift) => !item.title.toLowerCase().includes('captain') && !item.title.toLowerCase().includes('rookie'))
             if(showtime.length > 0)
-                return (<DataTable responsive={true} columns={columns} data={showtime} striped dense customStyles={customStyles} />)
+                return (<DataTable responsive={true} columns={columns} data={showtime} striped dense customStyles={customStyles} conditionalRowStyles={conditionalRowStyles} />)
             else
                 return(<span>No volunteers</span>);
         }
@@ -206,7 +235,7 @@ export const DailyShifts: React.FC = () => {
         if(!isLoading){
             const rookies = data.filter((item:Shift) => item.title.toLowerCase().includes('rookie'))
             if(rookies.length > 0)
-                return (<DataTable responsive={true} columns={columns} data={rookies} striped dense customStyles={customStyles} />)
+                return (<DataTable responsive={true} columns={columns} data={rookies} striped dense customStyles={customStyles} conditionalRowStyles={conditionalRowStyles} />)
             else
                 return(<span>No volunteers</span>);
         }
@@ -236,6 +265,11 @@ export const DailyShifts: React.FC = () => {
                     </Grid>
                 </Grid>
             </Grid>
+            {isLoading && (
+                <Grid container justifyContent="center" marginTop={2}>
+                    <CircularProgress />
+                </Grid>
+            )}
             <Grid container justifyContent="center" spacing={3}>
                 <Grid item xs={11} md={10}>
                     <Typography variant={"h4"} paddingBottom={1} style={{fontWeight: 'bold', color: 'navy'}}>Captains</Typography>

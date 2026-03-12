@@ -1,5 +1,7 @@
 import { initializeApp, FirebaseApp } from "firebase/app";
+import { getAnalytics, Analytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,6 +19,7 @@ try {
 } catch (err) {
   console.error("Firebase initialization error:", err);
 }
-
+export const analytics: Analytics = getAnalytics(app);
 export const auth = app ? getAuth(app) : null;
+export const db = getFirestore(app!);
 export default app;

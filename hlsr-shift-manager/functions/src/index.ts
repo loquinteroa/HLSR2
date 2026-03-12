@@ -24,8 +24,6 @@ const AZURE_API_KEY = process.env.AZURE_API_KEY || "";
 
 export const apiProxy = onRequest({ cors: true, invoker: "public" }, async (req, res) => {
   try {
-    // req.path is the full path e.g. "/api/committee/data"
-    // AZURE_API_URL already ends in "/api", so strip the leading "/api" prefix
     const apiPath = req.path.replace(/^\/api/, "") || "/";
     const azureUrl = `${AZURE_API_URL}${apiPath}`;
 

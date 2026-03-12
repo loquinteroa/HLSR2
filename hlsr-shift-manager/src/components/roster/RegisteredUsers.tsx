@@ -7,6 +7,7 @@ import DataTable from 'react-data-table-component';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import app from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
+import { ActivityLogger } from '../../api/ActivityLogger';
 import HLSRSBService from '../../api/HLSRSBService';
 import AppSettingsService from '../../api/AppSettingsService';
 import { Account } from '../../types/account';
@@ -57,7 +58,7 @@ function ProgressTitle() {
 }
 
 export const RegisteredUsers: React.FC = () => {
-    const { grantUserRole } = useAuth()
+    const { grantUserRole, currentUser } = useAuth()
     const [users, setUsers] = useState<FirebaseUser[]>([])
     const [filteredUsers, setFilteredUsers] = useState<FirebaseUser[]>([])
     const [search, setSearch] = useState("")
@@ -118,6 +119,7 @@ export const RegisteredUsers: React.FC = () => {
                 setUsers(userList)
                 setFilteredUsers(userList)
                 setReportTitle(`Registered Users (${userList.length})`)
+                ActivityLogger.logActivity("view_registered_users", currentUser?.email || "", { count: userList.length })
             })
             .catch((err: any) => {
                 console.error("Error loading registered users:", err)
@@ -170,6 +172,7 @@ export const RegisteredUsers: React.FC = () => {
                 ops.push(updateName({ email: roleDialogUser.email, displayName: newDisplayName }))
             }
             await Promise.all(ops)
+            ActivityLogger.logActivity("set_user_role", currentUser?.email || "", { targetEmail: roleDialogUser.email, role, nameChanged })
 
             const updatedUsers = users.map(u =>
                 u.email === roleDialogUser.email ? { ...u, role, displayName: newDisplayName } : u
@@ -208,6 +211,7 @@ export const RegisteredUsers: React.FC = () => {
         try {
             const resetUserPassword = httpsCallable(firebaseFunctions, 'resetUserPassword')
             await resetUserPassword({ email: resetDialogUser.email, password: resetPassword })
+            ActivityLogger.logActivity("reset_user_password", currentUser?.email || "", { targetEmail: resetDialogUser.email })
             setResetSuccess("Password has been reset successfully.")
             setResetPassword("")
         } catch (err: any) {
@@ -236,6 +240,7 @@ export const RegisteredUsers: React.FC = () => {
         try {
             const deleteUser = httpsCallable(firebaseFunctions, 'deleteUser')
             await deleteUser({ email: deleteDialogUser.email })
+            ActivityLogger.logActivity("delete_user", currentUser?.email || "", { targetEmail: deleteDialogUser.email })
             const updatedUsers = users.filter(u => u.email !== deleteDialogUser.email)
             setUsers(updatedUsers)
             setFilteredUsers(filteredUsers.filter(u => u.email !== deleteDialogUser.email))
@@ -291,6 +296,7 @@ export const RegisteredUsers: React.FC = () => {
                 password,
                 displayName: selectedMember.screenName,
             })
+            ActivityLogger.logActivity("register_user", currentUser?.email || "", { targetEmail: selectedMember.email, displayName: selectedMember.screenName })
             setRegisterSuccess(`${selectedMember.screenName} (${selectedMember.email}) has been registered.`)
             setSelectedMember(null)
             setPassword("")

@@ -109,6 +109,7 @@ export function convertToShiftsArray(
         memberId: elem.covering_member,
         memberName: account.screenName,
         memberPhone: account.phone,
+        memberEmail: account.email || "",
         onDuty: isMemberOnDuty(
           elem.covering_member,
           onDuty,

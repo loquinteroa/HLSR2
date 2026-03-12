@@ -3,6 +3,8 @@ import { Grid, Typography, Box } from '@mui/material';
 import { Skeleton, Stack } from '@mui/material';
 import HLSRSBService from '../../api/HLSRSBService'
 import AppSettingsService from "../../api/AppSettingsService";
+import { ActivityLogger } from '../../api/ActivityLogger';
+import { auth } from '../../firebase';
 import '../links/LinkItem.css';
 import DataTable from 'react-data-table-component';
 import { Account } from "../../types/account";
@@ -66,6 +68,7 @@ export const ITCRoster: React.FC = () => {
                         setMembers(membersList)
                         setFilteredMembers(membersList)
                         setReportTitle(response.committeeName + " Roster (" + membersList.length + ")")
+                        ActivityLogger.logActivity("view_roster", auth?.currentUser?.email || "", { committee: response.committeeName, count: membersList.length })
                     })
             })
             .catch((error: any) => {

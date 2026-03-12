@@ -157,15 +157,17 @@ function Header() {
             )}
             {AdminMenuOption()}
             {userRole === "Admin" && (
+              <MenuItem sx={{ px: 3 }} component={NavLink} to="/shifts-report" onClick={handleClose}>
+                SHIFTS REPORT
+              </MenuItem>
+            )}
+            {userRole === "Admin" && (
               <MenuItem sx={{ px: 3 }} component={NavLink} to="/registered-users" onClick={handleClose}>
                 REGISTERED USERS
               </MenuItem>
             )}
             <MenuItem sx={{ px: 3 }} component={NavLink} to="/logout" onClick={handleClose}>
               LOGOUT
-            </MenuItem>
-            <MenuItem sx={{ px: 3 }} onClick={() => { handleClose(); handleSignOut(); }}>
-              SIGN OUT
             </MenuItem>
           </Menu>
             </Box>
